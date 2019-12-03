@@ -1,6 +1,5 @@
-import os from 'os';
 import { argv } from 'yargs';
-import { get, toString, chain } from 'lodash';
+import { get, toString, toNumber, chain } from 'lodash';
 
 type ConsoleArgs = {
     fileName: string;
@@ -25,10 +24,12 @@ const callOnce = (func: Function): Function => {
 };
 
 export const firstLineToLower = callOnce((data: string): string => {
-    const endOfFirstLine = data.indexOf(os.EOL);
+    const endOfFirstLine = [data.indexOf('\n'), data.indexOf('\r\n'), data.indexOf('\r')].find(
+        (index: number) => index !== -1,
+    );
     const firstLine = data.substring(0, endOfFirstLine).toLowerCase();
 
-    return firstLine + data.substring(endOfFirstLine);
+    return firstLine + data.substring(toNumber(endOfFirstLine));
 });
 
 export const getConsoleArgs = (): ConsoleArgs => {
