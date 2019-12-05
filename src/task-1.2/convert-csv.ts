@@ -26,7 +26,7 @@ const run = (): void => {
 
         const readStream = fs.createReadStream(createPath(fileName));
         const writeStream = fs.createWriteStream(createPath(exportFileName));
-        const csvOptions = { ignoreColumns: new RegExp(ignoreColumns, 'i') };
+        const csvOptions = { ignoreColumns: new RegExp(ignoreColumns, 'i'), colParser: { price: 'number' } };
         const cvsConverter = csv(csvOptions);
 
         pipeline(readStream, prepareData, cvsConverter, writeStream, error => {
