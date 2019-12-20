@@ -5,13 +5,11 @@
 npm install
 ```
 
-## Task 1.1
+## Task 2
 ```
-npm run task1
+npm start
 ```
 
-## Task 1.2
-```
-npm run task2
-```
-You can find the result of the csv converter in the **./csv/result.txt** file.
+## Useful links
+- [Bulletproof node.js project architecture](https://dev.to/santypk4/bulletproof-node-js-project-architecture-4epf)
+- [Structure your solution by components](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/projectstructre/breakintcomponents.md)
