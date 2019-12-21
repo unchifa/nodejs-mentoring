@@ -1,55 +1,59 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { UserService } from './service';
 
 export const UserController = {
-    async get(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async get(req: Request, res: Response): Promise<void> {
         try {
             const { loginSubstring, limit } = req.query;
             const users = await UserService.select(loginSubstring, limit);
 
             res.json(users);
         } catch (e) {
-            next(e);
+            res.status(400);
+            res.send(e.message);
         }
     },
 
-    async create(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async create(req: Request, res: Response): Promise<void> {
         try {
-            // todo make validation
             const user = await UserService.create(req.body);
             res.json(user);
         } catch (e) {
-            next(e);
+            res.status(400);
+            res.send(e.message);
         }
     },
 
-    async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async getById(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const user = await UserService.getById(id);
             res.json(user);
         } catch (e) {
-            next(e);
+            res.status(400);
+            res.send(e.message);
         }
     },
 
-    async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async update(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const user = await UserService.update(id, req.body);
             res.json(user);
         } catch (e) {
-            next(e);
+            res.status(400);
+            res.send(e.message);
         }
     },
 
-    async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async delete(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             const user = await UserService.delete(id);
             res.json(user);
         } catch (e) {
-            next(e);
+            res.status(400);
+            res.send(e.message);
         }
     }
 };

@@ -1,6 +1,6 @@
 import { User } from './types';
 import { UserModel } from './model';
-import { UserUtils } from './utils';
+import { userCreateSchema, userUpdateSchema } from './schema';
 
 export const UserService = {
     async select(loginSubstring?: string, limit?: string): Promise<User[]> {
@@ -14,20 +14,25 @@ export const UserService = {
     },
 
     async create(data: User): Promise<User> {
-        const { login, password, age } = UserUtils.validate(data);
-        if (!login || !password || !age) {
-            return Promise.reject('error');
-        }
+        try {
+            const { login, password, age } = await userCreateSchema.validateAsync(data);
+            const user = await UserModel.create(login, password, age);
 
-        const user = await UserModel.create(login, password, age);
-        return Promise.resolve(user);
+            return Promise.resolve(user);
+        } catch (error) {
+            return Promise.reject(error);
+        }
     },
 
     async update(id: string, data: any): Promise<User> {
-        const { login, age } = UserUtils.validate(data);
+        try {
+            const { login, age } = await userUpdateSchema.validateAsync(data);
+            const user = await UserModel.update(id, login, age);
 
-        const user = await UserModel.update(id, login, age);
-        return Promise.resolve(user);
+            return Promise.resolve(user);
+        } catch (error) {
+            return Promise.reject(error);
+        }
     },
 
     async delete(id: string): Promise<User> {

@@ -7,11 +7,5 @@ export const UserUtils = {
             login,
             age
         };
-    },
-    validate(user: any): any {
-        if (!user) {
-            return {};
-        }
-        return user;
     }
 };
