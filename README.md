@@ -5,13 +5,8 @@
 npm install
 ```
 
-## Task 1.1
+## Task 2
 ```
-npm run task1
+npm start
 ```
-
-## Task 1.2
-```
-npm run task2
-```
-You can find the result of the csv converter in the **./csv/result.txt** file.
+API is available here: http://localhost:4004/api/users
