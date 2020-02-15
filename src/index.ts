@@ -1,15 +1,22 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+import express, { Application } from 'express';
 import cors from 'cors';
-import { userRouter } from './users';
+import { config } from './config';
+import { userRouter } from './modules/user';
+import { sequelize } from './resources';
+import { httpError } from './middlewares';
 
-const server = express();
+export const server: Application = express();
 
 server.use(cors());
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded());
+server.use(express.json());
 server.use('/api', [userRouter]);
+server.use(httpError());
 
-server.listen(4004, () => {
-    console.log('API is available here: http://localhost:4004/api/users');
-});
+sequelize
+    .sync()
+    .then(() => {
+        server.listen(config.port, () => {
+            console.log(`Application running on http://${config.host}:${config.port}`);
+        });
+    })
+    .catch((e: any) => console.log(e));
