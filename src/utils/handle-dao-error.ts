@@ -1,8 +1,8 @@
-import createError from 'http-errors';
+import Boom from '@hapi/boom';
 
 export const handleDaoError = (message: string) => (entity: any) => {
     if (!entity) {
-        throw createError(404, message);
+        throw Boom.notFound(message);
     }
     return entity;
 };

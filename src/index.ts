@@ -1,22 +1,34 @@
 import express, { Application } from 'express';
+import 'reflect-metadata';
 import cors from 'cors';
+import { sequelize } from '../resources';
 import { config } from './config';
-import { userRouter } from './modules/user';
-import { sequelize } from './resources';
-import { httpError } from './middlewares';
+import { httpError, notFound } from './middlewares';
+import { initializeUsers, initializeUserTable } from './modules/user';
+import { initializeGroups, initializeGroupTable } from './modules/group';
+import { initializeUsersGroupsTable } from './modules/user-group';
 
-export const server: Application = express();
+export const app: Application = express();
 
-server.use(cors());
-server.use(express.json());
-server.use('/api', [userRouter]);
-server.use(httpError());
+app.use(cors());
+app.use(express.json());
+
+initializeUsers(app);
+initializeGroups(app);
+
+app.use('/', notFound);
+app.use(httpError);
 
 sequelize
-    .sync()
+    .sync({ force: true })
+    .then(initializeUserTable)
+    .then(initializeGroupTable)
+    .then(initializeUsersGroupsTable)
     .then(() => {
-        server.listen(config.port, () => {
+        app.listen(config.port, () => {
+            // eslint-disable-next-line no-undef
             console.log(`Application running on http://${config.host}:${config.port}`);
         });
     })
-    .catch((e: any) => console.log(e));
+    // eslint-disable-next-line no-undef
+    .catch(e => console.log(e));

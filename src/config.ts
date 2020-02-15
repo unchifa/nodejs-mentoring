@@ -1,7 +1,4 @@
-const port = 4004;
-const host = 'localhost';
-
 export const config = {
-    host,
-    port
+    port: 4004,
+    host: 'localhost'
 };

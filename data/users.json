@@ -1,0 +1,20 @@
+[
+    {
+        "id": "b889f6ee-f86e-464a-867d-75cbed50dc93",
+        "login": "User 1",
+        "password": "123456fdgdfDFGDFg14",
+        "age": 24
+    },
+    {
+        "id": "30cdb359-96b8-419a-a13e-bfa52d3be869",
+        "login": "User 2",
+        "password": "12EWRwerwe3",
+        "age": 34
+    },
+    {
+        "id": "5050ba52-9ad9-4303-b24e-bd4dfb4ce922",
+        "login": "User 3",
+        "password": "15dfdFSDFSD3",
+        "age": 51
+    }
+]
