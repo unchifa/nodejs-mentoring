@@ -1,21 +1,13 @@
 import { Sequelize } from 'sequelize';
+import { config } from 'dotenv';
 
-enum Dialect {
-    POSTGRES = 'postgres'
-}
+config();
 
-const database = {
-    name: 'smrpkhrr',
-    password: 'r-U0dOONxp8tDbvUAZmyKQ1lr5VW0dH8',
-    username: 'smrpkhrr',
-    dialect: Dialect.POSTGRES,
-    host: 'rogue.db.elephantsql.com',
-    port: 5432
-};
+const { DB_NAME, DB_USERNAME, DB_PASSWORD, DB_DIALECT, DB_HOST, DB_PORT }: any = process.env;
 
-export const sequelize = new Sequelize(database.name, database.username, database.password, {
-    dialect: database.dialect,
-    host: database.host,
-    port: database.port,
+export const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
+    dialect: DB_DIALECT,
+    host: DB_HOST,
+    port: DB_PORT,
     define: { timestamps: false }
 });
