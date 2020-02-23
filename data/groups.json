@@ -1,0 +1,17 @@
+[
+    {
+        "id": "b889f6ee-f86e-464a-867d-75cbed50dc97",
+        "name": "Group1",
+        "permissions": ["READ"]
+    },
+    {
+        "id": "b879f6ee-f86e-464a-867d-75cbed50dc99",
+        "name": "Group2",
+        "permissions": ["READ", "WRITE"]
+    },
+    {
+        "id": "b879f6ee-f86e-464a-867d-75cbed50dc89",
+        "name": "Group3",
+        "permissions": ["READ", "WRITE", "SHARE"]
+    }
+]
