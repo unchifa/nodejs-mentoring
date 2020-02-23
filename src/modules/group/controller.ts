@@ -4,6 +4,7 @@ import { GroupModel } from './model';
 import { UserGroupModel } from '../user-group/model';
 import { UsersFromGroup } from './types';
 import { GroupService } from './service';
+import { logger } from '../../utils/logger';
 
 export const GroupController = {
     get: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -15,6 +16,7 @@ export const GroupController = {
 
             res.json(groups);
         } catch (e) {
+            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -28,6 +30,7 @@ export const GroupController = {
 
             res.json(group);
         } catch (e) {
+            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -42,6 +45,7 @@ export const GroupController = {
 
             res.status(201).json(group);
         } catch (e) {
+            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -56,6 +60,7 @@ export const GroupController = {
 
             res.json(group);
         } catch (e) {
+            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -69,6 +74,7 @@ export const GroupController = {
 
             res.json(group);
         } catch (e) {
+            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -82,6 +88,7 @@ export const GroupController = {
 
             res.json(users);
         } catch (e) {
+            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -96,6 +103,7 @@ export const GroupController = {
 
             res.status(201).json(usersGroups);
         } catch (e) {
+            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
