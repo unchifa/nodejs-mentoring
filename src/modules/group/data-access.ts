@@ -8,6 +8,7 @@ import { UserModel } from '../user/model';
 import { UsersFromGroup } from './types';
 import { UserGroupModel } from '../user-group/model';
 import groups from '../../../data/groups.json';
+import { logger } from '../../utils/logger';
 
 export const GroupRepository = {
     initialize: (): void => {
@@ -61,7 +62,9 @@ export const GroupRepository = {
                 return group.getUsers();
             });
         } catch (e) {
-            throw Boom.badRequest(e);
+            const error = Boom.badRequest(e);
+            logger.error(error);
+            throw error;
         }
     },
 
@@ -95,7 +98,9 @@ export const GroupRepository = {
                 return usersGroups;
             });
         } catch (e) {
-            throw Boom.badRequest(e);
+            const error = Boom.badRequest(e);
+            logger.error(error);
+            throw error;
         }
     }
 };
