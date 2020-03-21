@@ -9,6 +9,7 @@ import { logger } from './utils/logger';
 import { initializeUsers, initializeUserTable } from './modules/user';
 import { initializeGroups, initializeGroupTable } from './modules/group';
 import { initializeUsersGroupsTable } from './modules/user-group';
+import { initializeLogin } from './modules/login';
 
 export const app: Application = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 config();
 initializeUsers(app);
 initializeGroups(app);
+initializeLogin(app);
 
 app.use('/', notFound);
 app.use(httpError);

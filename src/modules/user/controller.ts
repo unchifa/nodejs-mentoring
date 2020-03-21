@@ -10,6 +10,7 @@ export const UserController = {
             const loginSubstring = get(req, 'query.login');
             const limit = get(req, 'query.limit');
 
+            // TODO remove password
             const users: UserModel[] = await UserService.select(loginSubstring, limit);
 
             res.json(users);

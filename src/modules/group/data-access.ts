@@ -62,9 +62,7 @@ export const GroupRepository = {
                 return group.getUsers();
             });
         } catch (e) {
-            const error = Boom.badRequest(e);
-            logger.error(error);
-            throw error;
+            throw Boom.badRequest(e);
         }
     },
 
@@ -98,9 +96,7 @@ export const GroupRepository = {
                 return usersGroups;
             });
         } catch (e) {
-            const error = Boom.badRequest(e);
-            logger.error(error);
-            throw error;
+            throw Boom.badRequest(e);
         }
     }
 };

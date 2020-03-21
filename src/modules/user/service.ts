@@ -9,6 +9,10 @@ export const UserService = {
         return UserRepository.select(options);
     },
 
+    login: (login: string, password: string): Promise<UserModel> => {
+        return UserRepository.login(login, password);
+    },
+
     getById: (id: string): Promise<UserModel> => {
         return UserRepository.getById(id);
     },

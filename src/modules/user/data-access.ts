@@ -9,12 +9,19 @@ export const UserRepository = {
         UserModel.bulkCreate(users);
     },
 
-    select: (options: Object): Promise<UserModel[]> => {
+    select: (options: Record<string, any>): Promise<UserModel[]> => {
         return UserModel.findAll(options);
     },
 
     getById: (id: string): Promise<UserModel> => {
         return UserModel.findByPk(id).then(handleDaoError('User not found'));
+    },
+
+    login: (login: string, password: string): Promise<UserModel> => {
+        return UserModel.findOne({
+            where: { login, password },
+            attributes: ['id']
+        });
     },
 
     create: async (dto: UserDTO): Promise<UserModel> => {
