@@ -1,10 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { get } from 'lodash';
 import { GroupModel } from './model';
-import { UserGroupModel } from '../user-group/model';
 import { UsersFromGroup } from './types';
 import { GroupService } from './service';
-import { logger } from '../../utils/logger';
 
 export const GroupController = {
     get: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -16,7 +14,6 @@ export const GroupController = {
 
             res.json(groups);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -30,7 +27,6 @@ export const GroupController = {
 
             res.json(group);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -45,7 +41,6 @@ export const GroupController = {
 
             res.status(201).json(group);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -60,7 +55,6 @@ export const GroupController = {
 
             res.json(group);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -70,11 +64,10 @@ export const GroupController = {
         try {
             const id = get(req, 'params.id');
 
-            const group: GroupModel = await GroupService.delete(id);
+            await GroupService.delete(id);
 
-            res.json(group);
+            res.status(200);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -88,7 +81,6 @@ export const GroupController = {
 
             res.json(users);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -99,11 +91,10 @@ export const GroupController = {
             const id = get(req, 'params.id');
             const userIds = get(req, 'body.userIds', []);
 
-            const usersGroups: UserGroupModel[] = await GroupService.addUsersToGroup(id, userIds);
+            await GroupService.addUsersToGroup(id, userIds);
 
-            res.status(201).json(usersGroups);
+            res.status(200);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }

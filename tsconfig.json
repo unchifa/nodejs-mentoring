@@ -12,7 +12,7 @@
         "noFallthroughCasesInSwitch": true,
         "esModuleInterop": true,
         "lib": ["dom", "es6", "scripthost", "es2015.promise"],
-        "types": ["reflect-metadata"],
+        "types": ["reflect-metadata", "jest"],
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,

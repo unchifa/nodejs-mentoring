@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import { get } from 'lodash';
 import { UserModel } from './model';
 import { UserService } from './service';
-import { logger } from '../../utils/logger';
 
 export const UserController = {
     get: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -15,7 +14,6 @@ export const UserController = {
 
             res.json(users);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -29,7 +27,6 @@ export const UserController = {
 
             res.json(user);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -45,7 +42,6 @@ export const UserController = {
 
             res.status(201).json(user);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -61,7 +57,6 @@ export const UserController = {
 
             res.json(user);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
@@ -71,11 +66,10 @@ export const UserController = {
         try {
             const id = get(req, 'params.id');
 
-            const user: UserModel = await UserService.delete(id);
+            await UserService.delete(id);
 
-            res.json(user);
+            res.status(200);
         } catch (e) {
-            logger.error(e);
             // eslint-disable-next-line callback-return
             next(e);
         }
