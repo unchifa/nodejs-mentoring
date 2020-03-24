@@ -10,7 +10,8 @@ module.exports = {
         sourceType: 'module',
     },
     env: {
-        es6: true
+        es6: true,
+        jest: true
     },
     rules: {
         "no-debugger": 1,

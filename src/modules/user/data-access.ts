@@ -18,6 +18,7 @@ export const UserRepository = {
     },
 
     login: (login: string, password: string): Promise<UserModel> => {
+        // todo use bcrypt for password
         return UserModel.findOne({
             where: { login, password },
             attributes: ['id']

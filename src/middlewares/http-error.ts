@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { HttpException } from '../interfaces';
+import { logger } from '../utils/logger';
 
 export const httpError = (err: HttpException, _req: Request, res: Response, next: NextFunction): void => {
     if (err.isBoom) {
@@ -9,5 +10,6 @@ export const httpError = (err: HttpException, _req: Request, res: Response, next
         const { statusCode = 500, message } = err;
         res.status(statusCode).json({ statusCode, message });
     }
+    logger.error(err);
     next(err);
 };
