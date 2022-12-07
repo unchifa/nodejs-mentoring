@@ -43,7 +43,7 @@
     "@hapi/boom": "^8.0.1",
     "@hapi/joi": "^16.1.8",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "logform": "^2.1.2",
